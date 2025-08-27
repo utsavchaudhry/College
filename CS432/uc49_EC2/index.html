@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Bicubic Bézier Patch — HW7 Viewer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <script src="https://greggman.github.io/webgl-lint/webgl-lint.js" crossorigin></script>
+
+  <script src="./Common/initShaders2.js"></script>
+  <script src="./Common/MVnew.js"></script>
+
+  <script src="camera.js"></script>
+  <script src="model.js"></script>
+  <script src="materials.js"></script>
+  <script src="lighting.js"></script>
+  <script defer src="./viewer.js"></script>
+
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #12151d;
+      --ink: #e9eef6;
+      --muted: #a6b0c3;
+      --accent: #7fc3ff;
+      --border: #1e2430;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: radial-gradient(1200px 600px at 30% -10%, #0f1420 0%, var(--bg) 60%);
+    }
+    header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: rgba(11,13,18,0.85); backdrop-filter: blur(6px);
+    }
+    header h1 {
+      margin: 0; font-size: 18px; letter-spacing: 0.3px; font-weight: 600;
+    }
+    header p {
+      margin: 4px 0 0; color: var(--muted);
+    }
+    .wrap {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 14px;
+      padding: 14px;
+      min-height: calc(100vh - 72px);
+    }
+    @media (max-width: 980px) {
+      .wrap { grid-template-columns: 1fr; }
+    }
+    .stage {
+      background: #0a0e15;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 10px;
+    }
+    .stage .bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 4px 6px 0 6px; color: var(--muted);
+      font-size: 12px;
+    }
+    canvas {
+      width: 100%;
+      height: min(72vh, 760px);
+      display: block;
+      border-radius: 8px;
+      background: #000;
+      cursor: grab;
+    }
+    canvas:active { cursor: grabbing; }
+
+    aside {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    aside h2 {
+      margin: 0 0 6px 0; font-size: 16px; font-weight: 600;
+    }
+    details {
+      border: 1px solid var(--border);
+      background: #0e121a;
+      border-radius: 8px;
+      margin: 10px 0;
+      padding: 10px 12px;
+    }
+    details[open] { background: #101623; }
+    details summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--accent);
+      font-weight: 600;
+      margin: -2px 0 6px 0;
+    }
+    details summary::-webkit-details-marker { display:none; }
+    kbd {
+      background: #1b2331;
+      color: #dfe8f7;
+      border: 1px solid #33425c;
+      box-shadow: inset 0 -1px 0 #00000060;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      margin: 0 2px;
+      white-space: nowrap;
+    }
+    .grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #c9d8f9; }
+    .muted { color: var(--muted); }
+    .pill {
+      font-size: 11px; color: #89b7ff; background: #0c1730; border: 1px solid #1b3a66;
+      border-radius: 999px; padding: 2px 8px; margin-left: 6px;
+    }
+    .note {
+      font-size: 12px; color: var(--muted);
+      border-left: 3px solid #2b3950; padding: 8px 10px; background: #0c111a; border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bicubic Bézier Patch Viewer <span class="pill">HW7</span></h1>
+    <p class="muted">Interactive tessellation, lighting (Gouraud / Phong), cylindrical light control, perspective/orthographic view, and hard reset.</p>
+  </header>
+
+  <main class="wrap">
+    <section class="stage">
+      <div class="bar">
+        <div>Canvas: <span class="mono">#glcanvas</span></div>
+        <div class="muted">Tip: click the canvas to focus before using keys</div>
+      </div>
+      <canvas id="glcanvas" width="960" height="720">
+        Your browser does not support WebGL 2.0
+      </canvas>
+    </section>
+
+    <aside>
+      <h2>Controls</h2>
+
+      <details open>
+        <summary>Control Points</summary>
+        <ul>
+          <li><kbd>N</kbd> / <kbd>B</kbd> : select next / previous control point.</li>
+          <li><kbd>A</kbd> / <kbd>D</kbd> : move along −/+ X.</li>
+          <li><kbd>W</kbd> / <kbd>S</kbd> : move along +/− Y.</li>
+          <li><kbd>Q</kbd> / <kbd>E</kbd> : move along −/+ Z.</li>
+          <li><kbd>Shift</kbd> : larger step; <kbd>Alt</kbd> : finer step.</li>
+        </ul>
+        <p>The selected point is highlighted (larger, red), and the patch updates while moving.</p>
+      </details>
+
+      <details open>
+        <summary>Mouse</summary>
+        <ul>
+          <li><kbd>Left Drag</kbd>: orbit camera (azimuth/elevation).</li>
+          <li><kbd>Right&nbsp;Drag</kbd> or <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>Drag</kbd>: pan camera target.</li>
+          <li><kbd>Wheel</kbd>: zoom (radius). Perspective and orthographic zoom are both supported.</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>Sampling (independent u/v)</summary>
+        <ul>
+          <li><kbd>U</kbd> : increase <span class="mono">nU</span> by +1; <kbd>Shift</kbd> + <kbd>U</kbd> : decrease (min 2).</li>
+          <li><kbd>V</kbd> : increase <span class="mono">nV</span> by +1; <kbd>Shift</kbd> + <kbd>V</kbd> : decrease (min 2).</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>Projection</summary>
+        <ul>
+          <li><kbd>P</kbd> : toggle Perspective ↔ Orthographic.</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>Shading &amp; Materials</summary>
+        <ul>
+          <li><kbd>G</kbd> : Gouraud (per-vertex) shading.</li>
+          <li><kbd>H</kbd> : Phong (per-fragment) shading.</li>
+          <li><kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd> : switch among predefined materials.</li>
+          <li><kbd>[</kbd> / <kbd>]</kbd> : decrease / increase shininess (±5, clamped).</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>Lights</summary>
+        <div class="grid">
+          <div>
+            <strong>Light A</strong> (object coords; cylindrical around patch center)
+            <ul>
+              <li><kbd>J</kbd> / <kbd>L</kbd> : -/+ angle θ.</li>
+              <li><kbd>I</kbd> / <kbd>K</kbd> : -/+ radius R (min 0).</li>
+              <li><kbd>O</kbd> / <kbd>;</kbd> : -/+ height H.</li>
+            </ul>
+          </div>
+          <div>
+            <strong>Light B</strong> (camera coords; near eye)
+            <ul>
+              <li><kbd>,</kbd> / <kbd>.</kbd> : -/+ height H.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Reset</summary>
+        <ul>
+          <li><kbd>R</kbd> : hard reset (sampling, camera, projection, lights, material, shading mode). No page reload required.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Data &amp; Implementation Notes</summary>
+        <div class="note">
+          Control points are hard-coded (i-j order) in <span class="mono">viewer.js</span>. The patch is tessellated iteratively into a triangle mesh;
+          vertex normals are computed by averaging adjacent face normals; normals are flipped against the eye as needed in the shader for two-sided shading.
+        </div>
+        <ul>
+          <li>Shaders target <span class="mono">WebGL 2.0 / GLSL ES 3.00</span>. Ensure <span class="mono">#version 300 es</span> is the very first line in each shader and that uniform interfaces match when linking.</li>
+          <li>Context: <span class="mono">canvas.getContext("webgl2")</span>.</li>
+        </ul>
+      </details>
+
+    </aside>
+  </main>
+</body>
+</html>

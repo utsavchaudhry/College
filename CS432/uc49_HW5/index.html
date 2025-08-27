@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WebGL2 3D Model Viewer</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    #controls { margin-bottom: 10px; }
+    #controls p { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <p><b>Controls:</b><br>
+       Arrow keys – rotate view (left/right: turn, up/down: tilt)<br>
+       I / O – zoom in / out<br>
+       P – toggle perspective/orthographic projection<br>
+       R – reset view</p>
+    <p><b>Select Model:</b>
+       <select id="modelSelect"></select>
+    </p>
+  </div>
+  <canvas id="gl-canvas" width="600" height="600">
+    Your browser does not support the HTML5 canvas element.
+  </canvas>
+
+  <script src="./Common/initShaders2.js"></script>
+  <script src="./Common/MVnew.js"></script>
+
+  <script src="./camera.js"></script>
+  <script src="./model.js"></script>
+  <script src="./viewer.js"></script>
+</body>
+</html>

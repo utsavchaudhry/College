@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WebGL Model Viewer - Lighting and Shading</title>
+  <style>
+    canvas { border: 1px solid black; }
+    #controls { margin-top: 10px; }
+    #controls label { margin-right: 15px; }
+  </style>
+</head>
+<body>
+  <canvas id="glcanvas" width="600" height="600"></canvas>
+  <div id="controls">
+    <label for="modelSelect">Model:
+      <select id="modelSelect">
+        <option value="bound-lo-sphere.smf">Sphere</option>
+        <option value="frog.smf">Frog</option>
+        <option value="bunny_5k.smf">Bunny (5k)</option>
+        <option value="bunny_200.smf">Bunny (200)</option>
+        <option value="cow.smf">Cow</option>
+        <option value="teddy.smf">Teddy Bear</option>
+        <option value="teapot.smf">Teapot</option>
+      </select>
+    </label>
+    <label for="shadingSelect">Shading:
+      <select id="shadingSelect">
+        <option value="gouraud">Gouraud</option>
+        <option value="phong">Phong</option>
+      </select>
+    </label>
+    <label for="materialSelect">Material:
+      <select id="materialSelect">
+        <option value="0">Blue</option>
+        <option value="1">Red</option>
+        <option value="2">Green</option>
+      </select>
+    </label>
+    <br/>
+    <label for="lightAAngle">Light A Angle:
+      <input type="range" id="lightAAngle" min="0" max="360" value="0" />
+    </label>
+    <label for="lightARadius">Light A Radius:
+      <input type="range" id="lightARadius" min="0" max="10" value="2" step="0.1" />
+    </label>
+    <label for="lightAHeight">Light A Height:
+      <input type="range" id="lightAHeight" min="-5" max="5" value="2" step="0.1" />
+    </label>
+    <br/>
+    <label for="lightBHeight">Light B Height:
+      <input type="range" id="lightBHeight" min="0" max="5" value="3" step="0.1" />
+    </label>
+  </div>
+  <p>
+    Use the dropdown menus to select the model, shading mode, and material. Use the sliders to adjust the position of Light A (orbit angle around the model, horizontal radius, vertical height) and the height of Light B (above the camera). 
+    Use the arrow keys (←↑→↓) to rotate the camera around the model and keys <strong>Z</strong> and <strong>X</strong> to zoom in/out. The scene updates in real time as you interact.
+  </p>
+
+  <script src="./Common/initShaders2.js"></script>
+  <script src="./Common/MVnew.js"></script>
+
+  <script src="camera.js"></script>
+  <script src="model.js"></script>
+  <script src="materials.js"></script>
+  <script src="lighting.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>

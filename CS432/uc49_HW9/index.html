@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WebGL Model Viewer – Multi-Object + Picking</title>
+  <style>
+    canvas { border: 1px solid black; display:block; }
+    #controls { margin-top: 10px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+    #controls label { margin-right: 6px; }
+    .muted { opacity: 0.6; }
+    details { margin-top: 10px; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; padding:0 4px; border:1px solid #ccc; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <canvas id="glcanvas" width="600" height="600" aria-label="WebGL canvas"></canvas>
+
+  <div id="controls">
+    <!-- Kept for compatibility, but disabled (scene always shows 3 fixed objects) -->
+    <span class="muted" title="Disabled: scene always loads 3 fixed objects">
+      <label for="modelSelect">Model:</label>
+      <select id="modelSelect" disabled>
+        <option value="bound-lo-sphere.smf">Sphere</option>
+        <option value="frog.smf">Frog</option>
+        <option value="bunny_5k.smf">Bunny (5k)</option>
+        <option value="bunny_200.smf">Bunny (200)</option>
+        <option value="cow.smf">Cow</option>
+        <option value="teddy.smf">Teddy Bear</option>
+        <option value="teapot.smf">Teapot</option>
+      </select>
+    </span>
+
+    <label for="shadingSelect">Shading:</label>
+    <select id="shadingSelect" aria-label="Shading mode">
+      <option value="gouraud">Gouraud</option>
+      <option value="phong">Phong</option>
+    </select>
+
+    <!-- Kept for compatibility, but disabled (each object gets its own material/color) -->
+    <span class="muted" title="Disabled: each object owns its color/material">
+      <label for="materialSelect">Material:</label>
+      <select id="materialSelect" disabled>
+        <option value="0">Blue</option>
+        <option value="1">Red</option>
+        <option value="2">Green</option>
+      </select>
+    </span>
+
+    <label for="lightAAngle">Light A Angle:</label>
+    <input type="range" id="lightAAngle" min="0" max="360" value="0" />
+
+    <label for="lightARadius">Light A Radius:</label>
+    <input type="range" id="lightARadius" min="0" max="10" value="2" step="0.1" />
+
+    <label for="lightAHeight">Light A Height:</label>
+    <input type="range" id="lightAHeight" min="-5" max="5" value="2" step="0.1" />
+
+    <label for="lightBHeight">Light B Height:</label>
+    <input type="range" id="lightBHeight" min="0" max="5" value="3" step="0.1" />
+
+    <button id="resetBtn" type="button" title="Reset camera (same as pressing 'R')">Reset View</button>
+  </div>
+
+  <details open>
+    <summary>How to use</summary>
+    <ul>
+      <li>The viewer loads <strong>three triangle-mesh objects</strong> aligned on the X-axis (collinear) and spaces them automatically.</li>
+      <li><span class="kbd">←</span><span class="kbd">→</span> rotate around the trio, <span class="kbd">↑</span><span class="kbd">↓</span> change elevation; <span class="kbd">Z</span>/<span class="kbd">X</span> to zoom in/out.</li>
+      <li><span class="kbd">R</span> or <em>Reset View</em> restores the initial fitted camera (slightly pulled back so all three are visible).</li>
+      <li><strong>Click</strong> any object to change its <em>diffuse color</em> to a random value (implemented via an off-screen FBO picking pass).</li>
+      <li><em>Lighting:</em> Light&nbsp;B is attached to the camera (head-lamp). Light&nbsp;A is positionable via the sliders.</li>
+      <li><em>Notes:</em> The “Model” and “Material” menus are disabled; the scene always renders three objects with independent colors.</li>
+    </ul>
+  </details>
+
+  <script src="./Common/initShaders2.js"></script>
+  <script src="./Common/MVnew.js"></script>
+
+  <script src="camera.js"></script>
+  <script src="model.js"></script>
+  <script src="materials.js"></script>
+  <script src="lighting.js"></script>
+  <script src="viewer.js"></script>
+
+  <script>
+    (function () {
+      const btn = document.getElementById('resetBtn');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          window.dispatchEvent(new KeyboardEvent('keydown', { key: 'r' }));
+        });
+      }
+    }());
+  </script>
+</body>
+</html>

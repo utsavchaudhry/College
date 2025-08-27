@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebGL Graphics Interface</title>
+
+  <script src="https://greggman.github.io/webgl-lint/webgl-lint.js" crossorigin></script>
+
+  <script src="./Common/initShaders2.js"></script>
+  <script src="./Common/MVnew.js"></script>
+
+  <script src="./cube.js"></script>
+  <script src="./app.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.5;
+    }
+    #controls {
+      margin-bottom: 16px;
+    }
+    #controls > * {
+      margin-right: 16px;
+      vertical-align: middle;
+    }
+    #instructions {
+      margin: 16px 0;
+      padding: 12px;
+      border: 1px dashed #666;
+      background-color: #f9f9f9;
+    }
+    #instructions h2 {
+      margin-top: 0;
+      font-size: 1.2em;
+    }
+    #instructions ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    canvas {
+      border: 1px solid #aaa;
+      display: block;
+      margin-top: 12px;
+      cursor: crosshair;
+    }
+    
+    #modeLabel {
+      margin-right: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <canvas id="gl-canvas" width="600" height="600">
+    Your browser does not support WebGL.
+  </canvas>
+
+  <br>
+
+  <strong id="modeLabel">Translation Delta:</strong>
+  <var id="modeValue">0.010</var>
+
+  <br>
+  <br>
+
+  <div id="controls">
+    <label for="mymenu">Transformation:</label>
+    <select id="mymenu" size="3">
+      <option value="0">Translate</option>
+      <option value="1">Rotate</option>
+      <option value="2">Scale</option>
+    </select>
+  </div>
+
+  <div id="instructions">
+    <h2>Keyboard Controls</h2>
+    <ul>
+      <li><strong>Q / W / E / A / S / D:</strong>  
+        Apply the selected transformation  
+        (<em>Translate</em> / <em>Rotate</em> / <em>Scale</em>) along the X, Y, or Z axis.</li>
+      <li><strong>M:</strong> Increase the transformation delta by 0.001 (up to 0.030).</li>
+      <li><strong>N:</strong> Decrease the transformation delta by 0.001 (down to 0.002).</li>
+      <li><strong>R:</strong> Reset position → (0,0,0), rotation → (π/6, π/4, 0), scale → (1,1,1), delta → 0.01.</li>
+    </ul>
+  </div>
+
+</body>
+</html>

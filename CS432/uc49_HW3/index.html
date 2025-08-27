@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebGL Graphics Interface</title>
+
+  <script src="https://greggman.github.io/webgl-lint/webgl-lint.js" crossorigin></script>
+  <script type="text/javascript" src="./Common/initShaders2.js"></script>
+  <script type="text/javascript" src="./Common/MVnew.js"></script>
+
+  <script type="text/javascript" src="./circle.js"></script>
+  <script type="text/javascript" src="./ellipse.js"></script>
+  <script type="text/javascript" src="./triangle.js"></script>
+  <script type="text/javascript" src="./square.js"></script>
+  <script type="text/javascript" src="./pentagon.js"></script>
+
+  <script type="text/javascript" src="./app.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #instructions {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 12px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    #controls {
+      margin-bottom: 16px;
+    }
+    #controls > * {
+      margin-right: 16px;
+      vertical-align: middle;
+    }
+    canvas {
+      border: 1px solid #aaa;
+      display: block;
+      margin-top: 12px;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="instructions">
+    <strong>Interface Instructions:</strong><br>
+    • Use the on-screen buttons, dropdowns, and sliders to modify graphics properties in real time.<br>
+    • Press r, g, b, y, p, or w to set the Triangle color to red, green, blue, yellow, purple, or white, respectively.<br>
+    • Left-click anywhere on the canvas to spawn a pentagon.<br>
+  </div>
+
+  <canvas id="gl-canvas" width="600" height="600">
+    Your browser does not support WebGL.
+  </canvas>
+
+  <div id="controls">
+    <button id="DirectionButton">Rotate Ellipse</button>
+
+    <label>Circle Size: 0.05</label>
+    <input id="slide" type="range" min="0.05" max="0.75" step="0.01" value="0.15">
+    <label>0.75</label>
+
+    <label>Square Color:</label>
+    <select id="mymenu" size="3">
+      <option value="0">Red</option>
+      <option value="1">Green</option>
+      <option value="2">Blue</option>
+      <option value="3">Purple</option>
+    </select>
+  </div>
+</body>
+</html>

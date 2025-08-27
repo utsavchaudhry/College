@@ -1,0 +1,214 @@
+<selector>
+
+    <sequence>
+        <condition>NoBase</condition>
+        <action>BuildBase</action>
+    </sequence>
+
+    <sequence>
+        <condition>NearestMineBlocked</condition>
+        <action>ClearMineAccess</action>
+    </sequence>
+
+    <sequence>
+        <condition>NoBarracks</condition>
+        <action>BuildBarracks</action>
+    </sequence>
+
+    <sequence>
+        <condition>BaseExistsAndPeasantCountLessThan4</condition>
+        <action>TrainPeasant</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdlePeasants</condition>
+        <action>SendPeasantsToWork</action>
+    </sequence>
+
+    <sequence>
+        <condition>BarracksExistsAndIdleAndResources</condition>
+        <condition>LessThan6Footmen</condition>
+        <action>TrainFootmen</action>
+    </sequence>
+
+    <sequence>
+        <condition>NoPeasantsInWood</condition>
+        <action>SendPeasantsToWood</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdlePeasants</condition>
+        <action>SendPeasantsToWork</action>
+    </sequence>
+
+    <sequence>
+        <condition>EnemyAttacking</condition>
+        <condition>NoTowers</condition>
+        <condition>CanAffordTowers</condition>
+        <action>BuildTower</action>
+    </sequence>
+
+    <sequence>
+        <condition>EnemyAttacking</condition>
+        <condition>LessThan3Towers</condition>
+        <condition>LotsOfResources</condition>
+        <action>Build3Towers</action>
+    </sequence>
+
+    <sequence>
+        <condition>EnemyAttacking</condition>
+        <condition>LotsOfResources</condition>
+        <condition>LessThan2Barracks</condition>
+        <action>BuildSecondBarracks</action>
+    </sequence>
+
+    <sequence>
+        <condition>EnemyAttackingAndIdleTroop</condition>
+        <action>Defend</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdleTroopCountAtLeast6</condition>
+        <action>AttackEnemy</action>
+    </sequence>
+
+    <sequence>
+        <condition>BaseExistsAndPeasantCountLessThan10</condition>
+        <action>TrainPeasant2</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdlePeasants</condition>
+        <action>SendPeasantsToWork</action>
+    </sequence>
+
+    <sequence>
+        <condition>BarracksExistsAndIdleAndResources</condition>
+        <condition>LessThan3Knights</condition>
+        <action>TrainKnight</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <sequence>
+            <condition>LessThan2Barracks</condition>
+            <action>BuildSecondBarracks</action>
+        </sequence>
+
+        <sequence>
+            <condition>NoPeasantsInWood</condition>
+            <action>SendPeasantsToWood</action>
+        </sequence>
+
+        <sequence>
+            <condition>IdlePeasants</condition>
+            <action>SendPeasantsToWork</action>
+        </sequence>
+
+        <sequence>
+            <condition>Stage2</condition>
+            <condition>BarracksExistsAndIdleAndResources</condition>
+            <condition>LessThan4Archers</condition>
+            <action>TrainArcher</action>
+        </sequence>
+
+        <sequence>
+            <condition>BarracksExistsAndIdleAndResources</condition>
+            <condition>LessThan3Knights</condition>
+            <action>TrainKnight</action>
+        </sequence>
+
+    </sequence>
+
+    <sequence>
+        <condition>NoPeasantsInWood</condition>
+        <action>SendPeasantsToWood</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdlePeasants</condition>
+        <action>SendPeasantsToWork</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <condition>BarracksExistsAndIdleAndResources</condition>
+        <condition>LessThan6Knights</condition>
+        <action>TrainKnight</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <condition>ReadyForBigAttack</condition>
+        <action>AttackEnemy</action>
+    </sequence>
+
+    <sequence>
+        <condition>EnemyAttackingAndIdleTroop</condition>
+        <action>Defend</action>
+    </sequence>
+
+    <sequence>
+        <condition>LotsOfIdleTroop</condition>
+        <action>MoveTroop</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdlePeasants</condition>
+        <action>SendPeasantsToWork</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <condition>BarracksExistsAndIdleAndResources</condition>
+        <condition>LessThan4Archers</condition>
+        <action>TrainArcher</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdlePeasants</condition>
+        <action>SendPeasantsToWork</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <condition>NoTowers</condition>
+        <action>BuildTower</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <condition>BarracksExistsAndIdleAndResources</condition>
+        <condition>LessThan10Knights</condition>
+        <action>TrainKnight</action>
+    </sequence>
+
+    <sequence>
+        <condition>IdlePeasants</condition>
+        <action>SendPeasantsToWork</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <condition>LotsOfResources</condition>
+        <condition>LessThan3Towers</condition>
+        <action>Build3Towers</action>
+    </sequence>
+
+    <sequence>
+        <condition>Stage2</condition>
+        <condition>ReadyForBigAttack</condition>
+        <action>AttackEnemy</action>
+    </sequence>
+
+    <sequence>
+        <condition>EnemyAttackingAndIdleTroop</condition>
+        <action>Defend</action>
+    </sequence>
+
+    <sequence>
+        <condition>LotsOfIdleTroop</condition>
+        <action>MoveTroop</action>
+    </sequence>
+
+</selector>
