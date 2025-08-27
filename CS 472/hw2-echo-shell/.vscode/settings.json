@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "unistd.h": "c",
+        "cs472-proto.h": "c"
+    }
+}

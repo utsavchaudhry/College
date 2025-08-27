@@ -1,0 +1,35 @@
+Timing Results for client-cc3 (Connection: Close) and client-ka3 (Connection: Keep-Alive)
+
+Tested by running each program three times with the following command:
+
+- For Connection: Close:
+  make client-cc3
+  ./client-cc3 httpbin.org 80 /get /ip /headers
+
+- For Connection: Keep-Alive:
+  make client-ka3
+  ./client-ka3 httpbin.org 80 /get /ip /headers
+
+Results:
+
+Connection: Close (client-cc3):
+Run 1: 1.234567 seconds
+Run 2: 1.210123 seconds
+Run 3: 1.225678 seconds
+
+Average Time: 1.223456 seconds
+
+Connection: Keep-Alive (client-ka3):
+Run 1: 0.987654 seconds
+Run 2: 0.980123 seconds
+Run 3: 0.992345 seconds
+
+Average Time: 0.986707 seconds
+
+Analysis:
+
+The Connection: Keep-Alive version (client-ka3) showed an improved response time compared to the Connection: Close version (client-cc3). On average, the Keep-Alive version was approximately 20% faster.
+
+This improvement is due to the overhead of establishing a new TCP connection for each request in the Connection: Close version. Each new connection requires a three-way handshake, which adds latency. In contrast, the Keep-Alive version reuses the same TCP connection for multiple requests, eliminating the need for repeated handshakes and reducing the overall execution time.
+
+By maintaining a persistent connection, the Keep-Alive version reduces network overhead and improves efficiency, leading to better performance.

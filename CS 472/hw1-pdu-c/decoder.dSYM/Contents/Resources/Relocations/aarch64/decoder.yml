@@ -1,0 +1,29 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     decoder
+relocations:
+  - { offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100002B68, symSize: 0xC0 }
+  - { offset: 0x3F, size: 0x8, addend: 0x0, symName: _raw_packet_arp_frame78, symObjAddr: 0x938, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offset: 0x79, size: 0x8, addend: 0x0, symName: _raw_packet_icmp_frame362, symObjAddr: 0x974, symBinAddr: 0x10000803C, symSize: 0x0 }
+  - { offset: 0x9A, size: 0x8, addend: 0x0, symName: _raw_packet_icmp_frame198, symObjAddr: 0x9D6, symBinAddr: 0x10000809E, symSize: 0x0 }
+  - { offset: 0xBB, size: 0x8, addend: 0x0, symName: _TEST_CASES, symObjAddr: 0xA38, symBinAddr: 0x100008100, symSize: 0x0 }
+  - { offset: 0x444, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100002B68, symSize: 0xC0 }
+  - { offset: 0x4C0, size: 0x8, addend: 0x0, symName: _decode_raw_packet, symObjAddr: 0xC0, symBinAddr: 0x100002C28, symSize: 0x178 }
+  - { offset: 0x570, size: 0x8, addend: 0x0, symName: __OSSwapInt16, symObjAddr: 0x238, symBinAddr: 0x100002DA0, symSize: 0x24 }
+  - { offset: 0x598, size: 0x8, addend: 0x0, symName: _process_arp, symObjAddr: 0x25C, symBinAddr: 0x100002DC4, symSize: 0xA0 }
+  - { offset: 0x5CE, size: 0x8, addend: 0x0, symName: _print_arp, symObjAddr: 0x2FC, symBinAddr: 0x100002E64, symSize: 0x280 }
+  - { offset: 0x5F2, size: 0x8, addend: 0x0, symName: _check_ip_for_icmp, symObjAddr: 0x57C, symBinAddr: 0x1000030E4, symSize: 0x24 }
+  - { offset: 0x61A, size: 0x8, addend: 0x0, symName: _process_icmp, symObjAddr: 0x5A0, symBinAddr: 0x100003108, symSize: 0x50 }
+  - { offset: 0x650, size: 0x8, addend: 0x0, symName: _is_icmp_echo, symObjAddr: 0x5F0, symBinAddr: 0x100003158, symSize: 0x50 }
+  - { offset: 0x678, size: 0x8, addend: 0x0, symName: _process_icmp_echo, symObjAddr: 0x640, symBinAddr: 0x1000031A8, symSize: 0xD8 }
+  - { offset: 0x6AE, size: 0x8, addend: 0x0, symName: _print_icmp_echo, symObjAddr: 0x718, symBinAddr: 0x100003280, symSize: 0x1C4 }
+  - { offset: 0x6EE, size: 0x8, addend: 0x0, symName: _print_icmp_payload, symObjAddr: 0x8DC, symBinAddr: 0x100003444, symSize: 0x5C }
+  - { offset: 0x7FA, size: 0x8, addend: 0x0, symName: _ip_toStr, symObjAddr: 0x0, symBinAddr: 0x1000034A0, symSize: 0xB0 }
+  - { offset: 0x815, size: 0x8, addend: 0x0, symName: _get_ts_formatted, symObjAddr: 0x514, symBinAddr: 0x1000039B4, symSize: 0xC0 }
+  - { offset: 0x83A, size: 0x8, addend: 0x0, symName: _get_ts_formatted.buff, symObjAddr: 0x1882, symBinAddr: 0x100008130, symSize: 0x0 }
+  - { offset: 0x8AD, size: 0x8, addend: 0x0, symName: _ip_toStr, symObjAddr: 0x0, symBinAddr: 0x1000034A0, symSize: 0xB0 }
+  - { offset: 0x8F1, size: 0x8, addend: 0x0, symName: _str_toIP, symObjAddr: 0xB0, symBinAddr: 0x100003550, symSize: 0x88 }
+  - { offset: 0x943, size: 0x8, addend: 0x0, symName: _str_toByteBuff, symObjAddr: 0x138, symBinAddr: 0x1000035D8, symSize: 0x2A0 }
+  - { offset: 0xA5E, size: 0x8, addend: 0x0, symName: _str_toMAC, symObjAddr: 0x3D8, symBinAddr: 0x100003878, symSize: 0x6C }
+  - { offset: 0xAA2, size: 0x8, addend: 0x0, symName: _mac_toStr, symObjAddr: 0x444, symBinAddr: 0x1000038E4, symSize: 0xD0 }
+...
