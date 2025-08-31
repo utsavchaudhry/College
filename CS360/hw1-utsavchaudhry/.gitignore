@@ -1,0 +1,10 @@
+*~
+*.bak
+*.dep
+*.exe
+*.zo
+.DS_Store/
+.vscode
+\#*
+compiled/
+run-tests
